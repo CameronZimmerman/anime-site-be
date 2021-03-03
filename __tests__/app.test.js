@@ -40,28 +40,29 @@ describe('app routes', () => {
           episodes: 1, 
           status: 'Test',
           synopsis: 'Test',
-          rating: 100.00,
+          rating: '0',
           poster: 'Test',
           db_id: -1
       
         };
       
-      const expectedFavorites = [
+      const expectedFavorites = 
         {
           ...newFavorite,
           id:2, 
           owner_id: 2
         }
-      ];
+      ;
       
 
       const data = await fakeRequest(app)
-        .post('/favorites')
+        .post('/api/favorites')
         .send(newFavorite)
+        .set('Authorization', token)
         .expect('Content-Type', /json/)
         .expect(200);
 
-      expect(data.body).toEqual(expectedFavorites);
+      expect(data.body[0]).toEqual(expectedFavorites);
     });
     test('returns favorites', async() => {
 
@@ -71,10 +72,10 @@ describe('app routes', () => {
           episodes: 1, 
           status: 'Test',
           synopsis: 'Test',
-          rating: 100.00,
+          rating: '0',
           poster: 'Test',
           db_id: -1,
-          ownder_id:2,
+          owner_id:2,
           id:2
       
         }
@@ -82,7 +83,8 @@ describe('app routes', () => {
       
 
       const data = await fakeRequest(app)
-        .get('/favorites')
+        .get('/api/favorites')
+        .set('Authorization', token)
         .expect('Content-Type', /json/)
         .expect(200);
 
