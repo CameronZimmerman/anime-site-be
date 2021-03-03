@@ -25,12 +25,12 @@ async function run() {
     const user = users[0].rows[0];
 
     await Promise.all(
-      favorites.map(({ title, episodes, status, synopsis, rating, poster }) => {
+      favorites.map(({ title, episodes, status, synopsis, rating, poster, db_id }) => {
         return client.query(`
                     INSERT INTO favorites (title, episodes, status, synopsis, rating, poster, owner_id)
-                    VALUES ($1, $2, $3, $4, $5, $6, $7);
+                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8);
                 `,
-        [title, episodes, status, synopsis, rating, poster, user.id]);
+        [title, episodes, status, synopsis, rating, poster, db_id, user.id]);
       })
     );
     
