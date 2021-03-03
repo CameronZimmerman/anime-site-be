@@ -25,7 +25,7 @@ async function run() {
                     synopsis VARCHAR(1000) NOT NULL, 
                     rating DECIMAL NOT NULL,
                     poster VARCHAR(512),
-                    db_id: INTEGER NOT NULL,
+                    db_id INTEGER NOT NULL,
                     owner_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);

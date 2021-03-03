@@ -7,6 +7,5 @@ module.exports = [
     rating: 76.48,
     poster: 'https://media.kitsu.io/anime/poster_images/244/small.jpg?1597698706',
     db_id: 244
-
-  }
+  } 
 ];
