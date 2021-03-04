@@ -5,6 +5,7 @@ const { execSync } = require('child_process');
 const fakeRequest = require('supertest');
 const app = require('../lib/app');
 const client = require('../lib/client');
+const request = require('superagent');
 
 describe('app routes', () => {
   describe('routes', () => {
@@ -106,6 +107,20 @@ describe('app routes', () => {
         .set('Authorization', token)
         .expect('Content-Type', /json/)
         .expect(200);
+      expect(data.body).toEqual(expected);
+    });
+    test('creates favorite', async() => {
+
+      const dbData = request.get('https://kitsu.io/api/edge/anime?filter[text]=bleach');
+      const expected = dbData.body.data;
+      
+
+      const data = await fakeRequest(app)
+        .get('/api/anime?search=bleach')
+        .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .expect(200);
+
       expect(data.body).toEqual(expected);
     });
   });
