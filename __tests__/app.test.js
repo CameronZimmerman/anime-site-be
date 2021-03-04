@@ -47,11 +47,11 @@ describe('app routes', () => {
         };
       
       const expectedFavorites = 
-        {
+        [{
           ...newFavorite,
           id:2, 
           owner_id: 2
-        }
+        }]
       ;
       
 
@@ -62,7 +62,7 @@ describe('app routes', () => {
         .expect('Content-Type', /json/)
         .expect(200);
 
-      expect(data.body[0]).toEqual(expectedFavorites);
+      expect(data.body).toEqual(expectedFavorites);
     });
     test('returns favorites', async() => {
 
@@ -89,6 +89,24 @@ describe('app routes', () => {
         .expect(200);
 
       expect(data.body).toEqual(expectation);
+    });
+
+    test('deletes favorite', async() => {
+
+      const expected = [];
+      
+
+      await fakeRequest(app)
+        .delete('/api/favorites/2')
+        .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .expect(200);
+      const data = await fakeRequest(app)
+        .get('/api/favorites')
+        .set('Authorization', token)
+        .expect('Content-Type', /json/)
+        .expect(200);
+      expect(data.body).toEqual(expected);
     });
   });
 });
