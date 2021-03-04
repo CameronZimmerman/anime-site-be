@@ -109,9 +109,9 @@ describe('app routes', () => {
         .expect(200);
       expect(data.body).toEqual(expected);
     });
-    test('creates favorite', async() => {
+    test('grabs anime by search query', async() => {
 
-      const dbData = request.get('https://kitsu.io/api/edge/anime?filter[text]=bleach');
+      const dbData = await request.get('https://kitsu.io/api/edge/anime?filter[text]=bleach');
       const expected = dbData.body.data;
       
 
