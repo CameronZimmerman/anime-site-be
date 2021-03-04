@@ -22,7 +22,7 @@ async function run() {
                     title VARCHAR(512) NOT NULL,
                     episodes INTEGER NOT NULL,
                     status VARCHAR(512) NOT NULL,
-                    synopsis VARCHAR(1000) NOT NULL, 
+                    synopsis VARCHAR(10000) NOT NULL, 
                     rating DECIMAL NOT NULL,
                     poster VARCHAR(512),
                     db_id INTEGER NOT NULL,
